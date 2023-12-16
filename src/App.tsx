@@ -1,44 +1,44 @@
+import React from 'react';
+import Header from "./component/layout/header.tsx"
+import Footer from "./component/layout/footer.tsx";
+import Login from "./views/login.tsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Home from "./views/home.tsx";
+import Signup from "./views/signup.tsx";
+import Editor from "./views/editor.tsx";
 
-import React from "react";
-import './App.css'
-class App extends React.Component<any, any>{
+class App extends React.Component<any, any> {
+
     state = {
-        count: 0,
-        visible: true
-    };
+        count: 0
+    }
 
-    up = (): void =>{
+    up = () => {
         this.setState({count: this.state.count + 1})
     }
 
-    down = (): void => {
-        this.setState({count: this.state.count - 1})
-    }
+    render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | Iterable<React.ReactNode> | React.ReactPortal | boolean | any | null | undefined {
+        return (
+            <div>
 
-    update = (type: string): void => {
-        switch (type){
-            case 'UP':
-                this.setState({count: this.state.count + 1});
-                break;
-            default:
-                this.setState({count: this.state.count - 1});
-                break;
 
-        }
-    }
+                <BrowserRouter>
+                    <Header/>
+                    <Routes>
+                        <Route path={"/"}element={<Home/>}/>
+                        <Route path={"/Login"}element={<Login/>}/>
+                        <Route path={"/Signup"}element={<Signup/>}/>
+                        <Route path={"/Editor"}element={<Editor/>}/>
+                    </Routes>
+                    <Footer/>
+                </BrowserRouter>
 
-    render() {
 
-        return(
-            <div className={"m-5"}>
-
-                <button className={"inline bg-green-600 px-5"} onClick={() => this.update('UP')}>+</button>
-                <div className={"inline mx-5 font-bold"}>{this.state.count}</div>
-                <button className={"inline bg-red-600 px-5"} onClick={() => this.update('DOWN')}>-</button>
 
             </div>
         );
     }
+
 }
 
 export default App
